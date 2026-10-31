@@ -10,7 +10,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+<!-- Библиотека QR-кода (надёжный сервер + запасной вариант ниже в скрипте) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
 <style>
   :root{
@@ -369,7 +370,6 @@
     line-height:1;
     z-index:2;
   }
-  /* Картина показывается ЦЕЛИКОМ, по центру, без пустых полей */
   .modal-media{
     margin:0 0 28px;
     text-align:center;
@@ -559,6 +559,7 @@
     background:#fff;
     border:1px solid var(--beige-dark);
     border-radius:4px;
+    min-height:120px;
   }
   #qrcode img, #qrcode canvas{display:block}
   .qr-url{
@@ -766,7 +767,7 @@
     <div class="works-masonry">
       <div class="work-card fade-in" data-work="0">
         <div class="work-media">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Demon.jpg?width=1000"
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Demon.jpg?width=900"
                alt="Демон сидящий, 1890" loading="lazy" onerror="workImgError(this)">
         </div>
         <div class="work-info">
@@ -778,7 +779,7 @@
 
       <div class="work-card fade-in" data-work="1">
         <div class="work-media">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Fallen_Demon.jpg?width=1200"
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Fallen_Demon.jpg?width=1000"
                alt="Демон поверженный, 1902" loading="lazy" onerror="workImgError(this)">
         </div>
         <div class="work-info">
@@ -790,7 +791,7 @@
 
       <div class="work-card fade-in" data-work="2">
         <div class="work-media">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tsarevna-Lebed_by_Mikhail_Vrubel_(brightened).jpg?width=800"
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tsarevna-Lebed_by_Mikhail_Vrubel_(brightened).jpg?width=700"
                alt="Царевна-Лебедь, 1900" loading="lazy" onerror="workImgError(this)">
         </div>
         <div class="work-info">
@@ -802,7 +803,7 @@
 
       <div class="work-card fade-in" data-work="3">
         <div class="work-media">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_pan.jpg?width=900"
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_pan.jpg?width=800"
                alt="Пан, 1899" loading="lazy" onerror="workImgError(this)">
         </div>
         <div class="work-info">
@@ -814,7 +815,7 @@
 
       <div class="work-card fade-in" data-work="4">
         <div class="work-media">
-          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Siren.jpg?width=1000"
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Siren.jpg?width=900"
                alt="Сирень, 1900" loading="lazy" onerror="workImgError(this)">
         </div>
         <div class="work-info">
@@ -939,45 +940,44 @@
 </section>
 
 <script>
-/* ========== ВАЖНАЯ ПЕРЕМЕННАЯ — URL САЙТА ДЛЯ QR ========== */
-/* После публикации сайта замените значение ниже на реальный адрес */
-   const SITE_URL = "https://paveltonkonogov7-commits.github.io/vrubel-omsk/";
-/* ============================================================ */
+/* ========== АДРЕТ ТВОЕГО САЙТА УЖЕ ВПИСАН ========== */
+const SITE_URL = "https://paveltonkonogov7-commits.github.io/vrubel-omsk/";
+/* =================================================== */
 
 /* ========== ДАННЫЕ ПРОИЗВЕДЕНИЙ ========== */
 const works = [
   {
     title:"Демон сидящий",
     year:"1890",
-    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Demon.jpg?width=1600",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Demon.jpg?width=1200",
     desc:"Одна из самых знаменитых работ Врубеля. На полотне изображён печальный, задумчивый демон с огромными крыльями на фоне горного пейзажа. Картина написана по мотивам поэмы М. Ю. Лермонтова «Демон».",
     why:"Эта работа открыла цикл «Демонов» — главную тему всего творчества Врубеля, в которой он переосмыслил образ лермонтовского героя. Хранится в Третьяковской галерее."
   },
   {
     title:"Демон поверженный",
     year:"1902",
-    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Fallen_Demon.jpg?width=1800",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Fallen_Demon.jpg?width=1400",
     desc:"Грандиозное полотно размером около 1,4 × 3,9 метра. Изображён поверженный демон со сломанными крыльями на фоне снежных вершин. Художник работал над картиной напряжённо, постоянно переписывая её.",
     why:"Кульминация всего «демонического» цикла и одна из самых масштабных работ Врубеля. Хранится в Третьяковской галерее."
   },
   {
     title:"Царевна-Лебедь",
     year:"1900",
-    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Tsarevna-Lebed_by_Mikhail_Vrubel_(brightened).jpg?width=1200",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Tsarevna-Lebed_by_Mikhail_Vrubel_(brightened).jpg?width=900",
     desc:"Образ героини оперы Н. А. Римского-Корсакова «Сказка о царе Салтане». Моделью стала жена художника Надежда Забела-Врубель, исполнявшая эту партию на сцене.",
     why:"Одна из самых узнаваемых работ художника: соединяет сказочность, портретность и декоративность — характерные черты стиля Врубеля. Хранится в Третьяковской галерее."
   },
   {
     title:"Пан",
     year:"1899",
-    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_pan.jpg?width=1200",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_pan.jpg?width=900",
     desc:"Мифологический образ древнегреческого бога лесов и пастбищ. Картина создана летом 1899 года почти без предварительных эскизов, на едином дыхании.",
     why:"Пример зрелого мастерства Врубеля: соединение русского пейзажа и античного мифологического образа в единое символическое целое. Хранится в Третьяковской галерее."
   },
   {
     title:"Сирень",
     year:"1900",
-    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Siren.jpg?width=1400",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Siren.jpg?width=1100",
     desc:"Поэтичное панно с женской фигурой среди цветущей сирени. Работа задумывалась как часть декоративного цикла для выставки и осталась авторским вариантом.",
     why:"Яркий пример декоративного мастерства Врубеля и его способности превращать обычные мотивы в поэтические символы. Хранится в Русском музее."
   }
@@ -992,7 +992,7 @@ const quizQuestions = [
   {q:"В каком городе умер Врубель?", options:["Омск","Санкт-Петербург","Казань"], correct:1}
 ];
 
-/* ========== ПЛАВНАЯ ПРОКРУТКА БЕЗ ПЕРЕЗАГРУЗКИ СТРАНИЦЫ ========== */
+/* ========== ПЛАВНАЯ ПРОКРУТКА БЕЗ ПЕРЕЗАГРУЗКИ ========== */
 function scrollToId(id){
   const el = document.getElementById(id);
   if(el){el.scrollIntoView({behavior:'smooth', block:'start'})}
@@ -1023,7 +1023,7 @@ function workImgError(img){
   media.appendChild(ph);
 }
 
-/* ========== МОДАЛЬНОЕ ОКНО ПРОИЗВЕДЕНИЙ ========== */
+/* ========== МОДАЛЬНОЕ ОКНО ========== */
 const modal = document.getElementById('workModal');
 const modalTitle = document.getElementById('modalTitle');
 const modalYear = document.getElementById('modalYear');
@@ -1132,14 +1132,12 @@ function renderResult(){
 
 renderQuestion();
 
-/* Кнопка «Пройти тест ещё раз» в финальном разделе:
-   сбрасывает тест и плавно прокручивает к нему БЕЗ перезагрузки страницы */
 document.getElementById('retakeBtn').addEventListener('click',()=>{
   resetQuiz();
   scrollToId('quiz');
 });
 
-/* ========== QR-КОД ========== */
+/* ========== QR-КОД (с запасным сервером) ========== */
 const qrContainer = document.getElementById('qrcode');
 const qrUrl = document.getElementById('qrUrl');
 
@@ -1155,7 +1153,20 @@ function generateQR(){
   });
   qrUrl.textContent = SITE_URL;
 }
-if(typeof QRCode !== 'undefined'){generateQR()}
+
+function startQR(){
+  if(typeof QRCode !== 'undefined'){
+    generateQR();
+  }else{
+    /* Если основной сервер недоступен — качаем библиотеку с запасного */
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/gh/davidshimjs/qrcodejs/qrcode.min.js';
+    s.onload = function(){ generateQR(); };
+    s.onerror = function(){ qrUrl.textContent = 'Генератор QR не загрузился (нет доступа к серверу)'; };
+    document.head.appendChild(s);
+  }
+}
+startQR();
 
 document.getElementById('downloadQR').addEventListener('click',()=>{
   const img = qrContainer.querySelector('img');
