@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Михаил Врубель: Омск → Россия</title>
+<meta name="description" content="Интерактивный цифровой стенд о Михаиле Врубеле — художнике, родившемся в Омске и ставшем одной из ярких фигур русского искусства.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+<style>
+  :root{
+    --dark:#1a1018;
+    --dark-2:#2a1a2e;
+    --purple:#4a2c5a;
+    --purple-light:#6b4580;
+    --purple-soft:#8a5c9c;
+    --beige:#f5e8d0;
+    --beige-dark:#e8d5b7;
+    --accent:#c9a96a;
+    --text:#2a1a2e;
+    --muted:#6b5a6e;
+    --shadow: 0 10px 40px rgba(26,16,24,0.15);
+    --shadow-lg: 0 20px 60px rgba(26,16,24,0.25);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,-apple-system,sans-serif;
+    color:var(--text);
+    background:var(--beige);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  h1,h2,h3{font-family:'Cormorant Garamond',serif;font-weight:600;letter-spacing:-0.01em}
+
+  .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+  /* ========== HERO ========== */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 20% 30%, rgba(107,69,128,0.35), transparent 60%),
+      radial-gradient(ellipse at 80% 70%, rgba(74,44,90,0.45), transparent 60%),
+      linear-gradient(135deg, #1a1018 0%, #2a1a2e 50%, #3a2545 100%);
+    overflow:hidden;
+    padding:80px 24px;
+  }
+  .hero::before{
+    content:"";
+    position:absolute;inset:0;
+    background-image:
+      radial-gradient(circle at 15% 20%, rgba(201,169,106,0.15) 0%, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(201,169,106,0.1) 0%, transparent 40%);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:"";
+    position:absolute;inset:0;
+    background:
+      repeating-linear-gradient(45deg, transparent 0, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
+    pointer-events:none;
+  }
+  .hero-content{position:relative;z-index:2;color:var(--beige);max-width:900px}
+  .hero-label{
+    display:inline-block;
+    font-size:0.85rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:30px;
+    opacity:0.8;
+  }
+  .hero h1{
+    font-size:clamp(2.5rem, 7vw, 5.5rem);
+    color:var(--beige);
+    margin-bottom:20px;
+    font-weight:500;
+    line-height:1;
+  }
+  .hero h2{
+    font-size:clamp(1.5rem, 3.5vw, 2.5rem);
+    color:var(--beige-dark);
+    margin-bottom:30px;
+    font-style:italic;
+    font-weight:400;
+  }
+  .hero p{
+    font-size:clamp(1rem, 1.5vw, 1.15rem);
+    color:rgba(245,232,208,0.85);
+    max-width:650px;
+    margin:0 auto 50px;
+    line-height:1.7;
+  }
+  .btn{
+    display:inline-block;
+    padding:16px 40px;
+    font-size:0.95rem;
+    font-weight:500;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    text-decoration:none;
+    border:none;
+    cursor:pointer;
+    border-radius:2px;
+    transition:all 0.4s ease;
+    font-family:inherit;
+  }
+  .btn-primary{background:var(--beige);color:var(--purple)}
+  .btn-primary:hover{
+    background:var(--accent);
+    color:var(--dark);
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(201,169,106,0.3);
+  }
+  .btn-secondary{background:transparent;color:var(--purple);border:2px solid var(--purple)}
+  .btn-secondary:hover{background:var(--purple);color:var(--beige)}
+  .scroll-indicator{
+    position:absolute;
+    bottom:30px;left:50%;
+    transform:translateX(-50%);
+    color:var(--beige);
+    opacity:0.6;
+    font-size:1.5rem;
+    animation:bounce 2s infinite;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(10px)}
+  }
+
+  /* ========== SECTIONS ========== */
+  section{padding:100px 0;position:relative}
+  .section-label{
+    display:block;
+    font-size:0.8rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--purple-light);
+    margin-bottom:16px;
+    font-weight:600;
+  }
+  .section-title{
+    font-size:clamp(2rem, 4vw, 3.2rem);
+    margin-bottom:20px;
+    color:var(--dark);
+  }
+  .section-intro{
+    font-size:1.1rem;
+    color:var(--muted);
+    max-width:700px;
+    margin-bottom:60px;
+  }
+
+  /* ========== WHY VRUBEL ========== */
+  .why-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:24px;
+    margin-bottom:50px;
+  }
+  .why-card{
+    background:#fff;
+    padding:40px 28px;
+    border-radius:4px;
+    box-shadow:var(--shadow);
+    text-align:center;
+    transition:all 0.4s ease;
+    border-top:3px solid var(--purple);
+  }
+  .why-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-lg)}
+  .why-card .num{
+    font-family:'Cormorant Garamond',serif;
+    font-size:3rem;
+    color:var(--purple);
+    font-weight:600;
+    line-height:1;
+  }
+  .why-card .label{
+    margin-top:12px;
+    font-size:0.85rem;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    color:var(--muted);
+  }
+  .why-flex{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:40px;
+    align-items:start;
+  }
+  .why-portrait{
+    background:#fff;
+    padding:18px 18px 10px;
+    box-shadow:var(--shadow);
+    border-top:3px solid var(--accent);
+  }
+  .why-portrait img{width:100%;display:block}
+  .portrait-caption{
+    display:block;
+    text-align:center;
+    font-size:0.8rem;
+    color:var(--muted);
+    padding:12px 0 8px;
+    font-style:italic;
+  }
+  .why-text{
+    background:#fff;
+    padding:40px;
+    border-radius:4px;
+    box-shadow:var(--shadow);
+    font-size:1.05rem;
+    line-height:1.8;
+    color:var(--text);
+  }
+  .why-text p{margin-bottom:14px}
+  .why-text p:last-child{margin-bottom:0}
+  .why-text strong{color:var(--purple)}
+  @media(max-width:900px){
+    .why-flex{grid-template-columns:1fr}
+    .why-portrait{max-width:340px;margin:0 auto}
+  }
+
+  /* ========== TIMELINE ========== */
+  .timeline-section{background:linear-gradient(180deg, var(--beige) 0%, #eadbc0 100%)}
+  .timeline{position:relative;max-width:850px;margin:0 auto;padding:40px 0}
+  .timeline::before{
+    content:"";
+    position:absolute;
+    left:50%;top:0;bottom:0;
+    width:2px;
+    background:linear-gradient(180deg, var(--purple-light), var(--purple));
+    transform:translateX(-50%);
+  }
+  .tl-item{position:relative;width:50%;padding:30px 50px;margin-bottom:20px}
+  .tl-item:nth-child(odd){left:0;text-align:right}
+  .tl-item:nth-child(even){left:50%}
+  .tl-item::before{
+    content:"";
+    position:absolute;
+    top:45px;
+    width:18px;height:18px;
+    background:var(--purple);
+    border:4px solid var(--beige);
+    border-radius:50%;
+    box-shadow:0 0 0 2px var(--purple);
+  }
+  .tl-item:nth-child(odd)::before{right:-10px}
+  .tl-item:nth-child(even)::before{left:-10px}
+  .tl-card{
+    background:#fff;
+    padding:25px 30px;
+    border-radius:4px;
+    box-shadow:var(--shadow);
+    transition:all 0.4s ease;
+  }
+  .tl-card:hover{transform:scale(1.02)}
+  .tl-card h3{font-size:1.8rem;color:var(--purple);margin-bottom:10px;font-weight:600}
+  .tl-card p{color:var(--muted);font-size:0.95rem}
+  @media(max-width:768px){
+    .timeline::before{left:20px}
+    .tl-item{width:100%;left:0!important;text-align:left!important;padding:20px 20px 20px 50px}
+    .tl-item::before{left:11px!important;right:auto!important}
+  }
+
+  /* ========== WORKS (masonry) ========== */
+  .works-masonry{columns:3;column-gap:24px}
+  @media(max-width:980px){.works-masonry{columns:2}}
+  @media(max-width:620px){.works-masonry{columns:1}}
+  .work-card{
+    break-inside:avoid;
+    -webkit-column-break-inside:avoid;
+    background:#fff;
+    border-radius:4px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+    cursor:pointer;
+    transition:all 0.5s ease;
+    margin-bottom:24px;
+    display:block;
+    width:100%;
+  }
+  .work-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+  .work-media{
+    position:relative;
+    overflow:hidden;
+    background:var(--dark-2);
+    line-height:0;
+  }
+  .work-media img{
+    width:100%;
+    display:block;
+    transition:transform 0.6s ease;
+  }
+  .work-card:hover .work-media img{transform:scale(1.05)}
+  .work-placeholder{
+    aspect-ratio:4/5;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg,#4a2c5a 0%,#2a1a2e 100%);
+    color:var(--accent);
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:1.3rem;
+    text-align:center;
+    padding:20px;
+    line-height:1.4;
+  }
+  .work-info{padding:22px 24px}
+  .work-info h3{font-size:1.4rem;color:var(--dark);margin-bottom:6px}
+  .work-info .year{
+    color:var(--purple-light);
+    font-size:0.9rem;
+    font-weight:600;
+    letter-spacing:0.1em;
+  }
+  .work-hint{
+    font-size:0.8rem;
+    color:var(--muted);
+    margin-top:8px;
+    font-style:italic;
+  }
+
+  /* Модальное окно */
+  .modal-overlay{
+    position:fixed;inset:0;
+    background:rgba(26,16,24,0.85);
+    backdrop-filter:blur(8px);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:1000;
+    padding:20px;
+    animation:fadeIn 0.3s ease;
+  }
+  .modal-overlay.active{display:flex}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .modal{
+    background:#fff;
+    border-radius:4px;
+    max-width:880px;
+    width:100%;
+    max-height:92vh;
+    overflow-y:auto;
+    padding:50px;
+    position:relative;
+    animation:slideUp 0.4s ease;
+  }
+  @keyframes slideUp{from{transform:translateY(30px);opacity:0}to{transform:translateY(0);opacity:1}}
+  .modal-close{
+    position:absolute;
+    top:20px;right:20px;
+    background:none;border:none;
+    font-size:1.8rem;
+    cursor:pointer;
+    color:var(--muted);
+    line-height:1;
+    z-index:2;
+  }
+  /* Картина показывается ЦЕЛИКОМ, по центру, без пустых полей */
+  .modal-media{
+    margin:0 0 28px;
+    text-align:center;
+    line-height:0;
+  }
+  .modal-media img{
+    max-width:100%;
+    max-height:60vh;
+    width:auto;
+    height:auto;
+    display:inline-block;
+    border-radius:2px;
+    box-shadow:0 15px 45px rgba(26,16,24,0.35);
+  }
+  .modal h2{font-size:2.2rem;color:var(--purple);margin-bottom:10px}
+  .modal .modal-year{
+    display:inline-block;
+    background:var(--purple);
+    color:var(--beige);
+    padding:4px 14px;
+    border-radius:2px;
+    font-size:0.85rem;
+    font-weight:600;
+    letter-spacing:0.1em;
+    margin-bottom:25px;
+  }
+  .modal p{margin-bottom:14px;line-height:1.8}
+  .modal .why-important{
+    border-left:3px solid var(--accent);
+    padding-left:18px;
+    margin-top:20px;
+    font-style:italic;
+    color:var(--muted);
+  }
+
+  /* ========== FEATURES ========== */
+  .features-section{background:var(--dark);color:var(--beige)}
+  .features-section .section-label{color:var(--accent)}
+  .features-section .section-title{color:var(--beige)}
+  .features-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;
+  }
+  .feature-card{
+    background:rgba(245,232,208,0.05);
+    padding:40px 30px;
+    border-radius:4px;
+    border:1px solid rgba(201,169,106,0.2);
+    transition:all 0.4s ease;
+  }
+  .feature-card:hover{
+    background:rgba(245,232,208,0.1);
+    border-color:var(--accent);
+    transform:translateY(-4px);
+  }
+  .feature-icon{font-size:2rem;margin-bottom:16px}
+  .feature-card h3{font-size:1.4rem;color:var(--accent);margin-bottom:12px}
+  .feature-card p{color:rgba(245,232,208,0.8);font-size:0.95rem;line-height:1.7}
+
+  /* ========== QUIZ ========== */
+  .quiz-section{background:var(--beige-dark)}
+  .quiz-container{
+    max-width:750px;
+    margin:0 auto;
+    background:#fff;
+    padding:50px;
+    border-radius:4px;
+    box-shadow:var(--shadow-lg);
+  }
+  .quiz-question{margin-bottom:10px;display:none}
+  .quiz-question.active{display:block;animation:fadeIn 0.4s ease}
+  .quiz-question h3{font-size:1.35rem;color:var(--dark);margin-bottom:20px;line-height:1.4}
+  .quiz-question .q-num{
+    display:block;
+    font-size:0.8rem;
+    color:var(--purple-light);
+    letter-spacing:0.2em;
+    margin-bottom:10px;
+    font-weight:600;
+  }
+  .quiz-options{display:flex;flex-direction:column;gap:10px}
+  .quiz-option{
+    padding:16px 20px;
+    background:var(--beige);
+    border:2px solid transparent;
+    border-radius:4px;
+    cursor:pointer;
+    transition:all 0.3s ease;
+    font-family:inherit;
+    font-size:1rem;
+    text-align:left;
+    color:var(--text);
+  }
+  .quiz-option:hover{border-color:var(--purple-light);background:#fff}
+  .quiz-option.selected{border-color:var(--purple);background:#fff;font-weight:600}
+  .quiz-controls{
+    display:flex;
+    justify-content:space-between;
+    margin-top:30px;
+    gap:15px;
+    flex-wrap:wrap;
+  }
+  .quiz-progress{
+    text-align:center;
+    color:var(--muted);
+    font-size:0.9rem;
+    margin-bottom:30px;
+    letter-spacing:0.1em;
+  }
+  .quiz-result{text-align:center;padding:40px 20px}
+  .quiz-result h3{font-size:2.5rem;color:var(--purple);margin-bottom:15px}
+  .quiz-result .score{
+    font-family:'Cormorant Garamond',serif;
+    font-size:5rem;
+    color:var(--purple);
+    font-weight:700;
+    line-height:1;
+    margin:20px 0;
+  }
+  .quiz-result p{color:var(--muted);margin-bottom:25px}
+
+  /* ========== OMSK TODAY ========== */
+  .omsk-section{
+    background:linear-gradient(135deg, rgba(74,44,90,0.95), rgba(42,26,46,0.95));
+    color:var(--beige);
+    text-align:center;
+  }
+  .omsk-section .section-label{color:var(--accent)}
+  .omsk-section .section-title{color:var(--beige)}
+  .omsk-text{
+    font-size:1.25rem;
+    line-height:1.9;
+    max-width:800px;
+    margin:0 auto;
+    color:rgba(245,232,208,0.9);
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+  }
+  .omsk-text::before,
+  .omsk-text::after{
+    content:"❦";
+    display:block;
+    color:var(--accent);
+    font-size:1.5rem;
+    margin:20px 0;
+    font-style:normal;
+  }
+
+  /* ========== FINAL ========== */
+  .final-section{background:var(--beige);text-align:center;padding:120px 0}
+  .final-section .section-title{
+    max-width:800px;
+    margin:0 auto 30px;
+    font-size:clamp(2rem, 4.5vw, 3.5rem);
+  }
+  .final-section p{
+    max-width:700px;
+    margin:0 auto 40px;
+    font-size:1.15rem;
+    color:var(--muted);
+    line-height:1.8;
+  }
+
+  /* ========== QR ========== */
+  .qr-section{
+    background:linear-gradient(180deg, var(--beige) 0%, #d8c5a8 100%);
+    text-align:center;
+    padding:80px 0;
+  }
+  .qr-card{
+    max-width:500px;
+    margin:0 auto;
+    background:#fff;
+    padding:50px;
+    border-radius:4px;
+    box-shadow:var(--shadow-lg);
+    border-top:4px solid var(--purple);
+  }
+  .qr-card h2{font-size:2rem;color:var(--purple);margin-bottom:10px}
+  .qr-card .qr-subtitle{color:var(--muted);margin-bottom:30px;font-size:0.95rem}
+  #qrcode{
+    display:flex;
+    justify-content:center;
+    margin:25px 0;
+    padding:20px;
+    background:#fff;
+    border:1px solid var(--beige-dark);
+    border-radius:4px;
+  }
+  #qrcode img, #qrcode canvas{display:block}
+  .qr-url{
+    font-family:'Cormorant Garamond',serif;
+    font-size:0.95rem;
+    color:var(--purple-light);
+    word-break:break-all;
+    margin:15px 0 25px;
+    font-style:italic;
+  }
+  .download-btn{
+    background:var(--purple);
+    color:var(--beige);
+    padding:14px 35px;
+    border-radius:2px;
+    border:none;
+    cursor:pointer;
+    font-family:inherit;
+    font-size:0.9rem;
+    font-weight:500;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+  }
+  .download-btn:hover{background:var(--dark);transform:translateY(-2px)}
+
+  /* ========== SOURCES / AUTHOR ========== */
+  .sources-section{
+    background:var(--dark);
+    color:rgba(245,232,208,0.7);
+    padding:70px 0 40px;
+    text-align:center;
+  }
+  .author-card{
+    display:inline-block;
+    border:1px solid rgba(201,169,106,0.45);
+    background:rgba(245,232,208,0.05);
+    padding:26px 46px;
+    border-radius:4px;
+    margin-bottom:55px;
+  }
+  .author-label{
+    font-size:0.75rem;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--accent);
+    margin-bottom:10px;
+  }
+  .author-name{
+    font-family:'Cormorant Garamond',serif;
+    font-size:2rem;
+    color:var(--beige);
+    font-weight:600;
+    line-height:1.2;
+  }
+  .author-meta{
+    color:rgba(245,232,208,0.75);
+    font-size:0.95rem;
+    margin-top:8px;
+  }
+  .sources-section h3{color:var(--beige);font-size:1.5rem;margin-bottom:25px}
+  .sources-list{
+    max-width:800px;
+    margin:0 auto;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-size:0.9rem;
+  }
+  .sources-list a{color:var(--accent);text-decoration:none;transition:color 0.3s}
+  .sources-list a:hover{color:var(--beige)}
+  .copyright{margin-top:40px;font-size:0.8rem;color:rgba(245,232,208,0.4)}
+
+  /* ========== Анимации появления ========== */
+  .fade-in{
+    opacity:0;
+    transform:translateY(30px);
+    transition:all 0.8s cubic-bezier(0.22,1,0.36,1);
+  }
+  .fade-in.visible{opacity:1;transform:translateY(0)}
+
+  @media(max-width:768px){
+    section{padding:70px 0}
+    .hero{padding:60px 20px}
+    .modal{padding:35px 25px}
+    .quiz-container{padding:30px 25px}
+    .qr-card{padding:35px 25px}
+    .why-card{padding:30px 20px}
+    .why-card .num{font-size:2.5rem}
+    .why-text{padding:30px 25px}
+    .btn{padding:14px 28px;font-size:0.85rem}
+    .author-card{padding:22px 28px}
+    .author-name{font-size:1.6rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="hero-content">
+    <span class="hero-label">Цифровой культурный стенд</span>
+    <h1>Михаил Врубель</h1>
+    <h2>«Омск → Россия»</h2>
+    <p>Художник, родившийся в Омске и ставший одной из ярких фигур русского искусства конца XIX — начала XX века.</p>
+    <button type="button" class="btn btn-primary" data-scroll="why">Исследовать</button>
+  </div>
+  <div class="scroll-indicator">↓</div>
+</section>
+
+<!-- ==================== WHY VRUBEL ==================== -->
+<section id="why">
+  <div class="container">
+    <span class="section-label fade-in">01 — Выбор героя</span>
+    <h2 class="section-title fade-in">Почему именно Врубель?</h2>
+    <p class="section-intro fade-in">Коротко о главных причинах, по которым Михаил Врубель стал героем этого проекта.</p>
+
+    <div class="why-grid">
+      <div class="why-card fade-in">
+        <div class="num">1856</div>
+        <div class="label">Год рождения</div>
+      </div>
+      <div class="why-card fade-in">
+        <div class="num" style="font-size:2rem;margin-top:14px">Омск</div>
+        <div class="label">Место рождения</div>
+      </div>
+      <div class="why-card fade-in">
+        <div class="num">1910</div>
+        <div class="label">Год смерти</div>
+      </div>
+    </div>
+
+    <div class="why-flex">
+      <div class="why-portrait fade-in">
+        <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Mikhail_Vrubel_-_self-portrait_(1904-5,_GTG).jpg?width=600"
+             alt="Михаил Врубель. Автопортрет, 1904–1905"
+             loading="lazy"
+             onerror="this.onerror=null;this.src='';this.style.aspectRatio='4/5';this.style.background='linear-gradient(135deg,#4a2c5a,#2a1a2e)';">
+        <span class="portrait-caption">М. А. Врубель. Автопортрет, 1904–1905. Третьяковская галерея</span>
+      </div>
+      <div class="why-text fade-in">
+        <p>Михаил Александрович Врубель <strong>родился 17 марта 1856 года в Омске</strong>, куда его отец, военный юрист, был направлен по службе. Первые годы жизни художника прошли в нашем городе — это часть его биографической истории.</p>
+        <p>Со временем Врубель стал одним из самых <strong>узнаваемых художников русского искусства</strong>, представителем символизма и модерна, чьи работы находятся в крупнейших музеях страны.</p>
+        <p>Его творчество отличается <strong>необычным, самобытным стилем</strong>, который невозможно спутать ни с чьим другим. Именно поэтому он — достойный герой проекта «Ими гордится наш регион».</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TIMELINE ==================== -->
+<section class="timeline-section">
+  <div class="container">
+    <span class="section-label fade-in">02 — Жизненный путь</span>
+    <h2 class="section-title fade-in">Интерактивный таймлайн</h2>
+    <p class="section-intro fade-in">Ключевые этапы жизни и творчества Михаила Александровича Врубеля.</p>
+
+    <div class="timeline">
+      <div class="tl-item fade-in">
+        <div class="tl-card">
+          <h3>1856</h3>
+          <p>Рождение Михаила Врубеля в Омске в семье военного юриста Александра Михайловича Врубеля.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-in">
+        <div class="tl-card">
+          <h3>1870-е</h3>
+          <p>Образование в гимназиях Одессы и Санкт-Петербурга. Формирование художественного мировоззрения, первые уроки рисования.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-in">
+        <div class="tl-card">
+          <h3>1880-е</h3>
+          <p>Учёба в Академии художеств у П. П. Чистякова. Профессиональное становление. Работа над реставрацией кирилловских фресок в Киеве.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-in">
+        <div class="tl-card">
+          <h3>1890-е</h3>
+          <p>Период зрелого творчества. Переезд в Москву, сотрудничество с С. И. Мамонтовым. Создание цикла «Демонов».</p>
+        </div>
+      </div>
+      <div class="tl-item fade-in">
+        <div class="tl-card">
+          <h3>1900-е</h3>
+          <p>Создание наиболее известных произведений: «Демон поверженный», «Царевна-Лебедь», «Сирень», «Пан». Признание и награды.</p>
+        </div>
+      </div>
+      <div class="tl-item fade-in">
+        <div class="tl-card">
+          <h3>1910</h3>
+          <p>14 апреля — смерть художника в Санкт-Петербурге после тяжёлой болезни. Похоронен на Новодевичьем кладбище.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== WORKS ==================== -->
+<section>
+  <div class="container">
+    <span class="section-label fade-in">03 — Наследие</span>
+    <h2 class="section-title fade-in">5 произведений, которые стоит знать</h2>
+    <p class="section-intro fade-in">Нажмите на карточку, чтобы узнать больше о каждой работе.</p>
+
+    <div class="works-masonry">
+      <div class="work-card fade-in" data-work="0">
+        <div class="work-media">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Demon.jpg?width=1000"
+               alt="Демон сидящий, 1890" loading="lazy" onerror="workImgError(this)">
+        </div>
+        <div class="work-info">
+          <h3>Демон сидящий</h3>
+          <div class="year">1890</div>
+          <div class="work-hint">Нажмите, чтобы узнать больше →</div>
+        </div>
+      </div>
+
+      <div class="work-card fade-in" data-work="1">
+        <div class="work-media">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Fallen_Demon.jpg?width=1200"
+               alt="Демон поверженный, 1902" loading="lazy" onerror="workImgError(this)">
+        </div>
+        <div class="work-info">
+          <h3>Демон поверженный</h3>
+          <div class="year">1902</div>
+          <div class="work-hint">Нажмите, чтобы узнать больше →</div>
+        </div>
+      </div>
+
+      <div class="work-card fade-in" data-work="2">
+        <div class="work-media">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Tsarevna-Lebed_by_Mikhail_Vrubel_(brightened).jpg?width=800"
+               alt="Царевна-Лебедь, 1900" loading="lazy" onerror="workImgError(this)">
+        </div>
+        <div class="work-info">
+          <h3>Царевна-Лебедь</h3>
+          <div class="year">1900</div>
+          <div class="work-hint">Нажмите, чтобы узнать больше →</div>
+        </div>
+      </div>
+
+      <div class="work-card fade-in" data-work="3">
+        <div class="work-media">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_pan.jpg?width=900"
+               alt="Пан, 1899" loading="lazy" onerror="workImgError(this)">
+        </div>
+        <div class="work-info">
+          <h3>Пан</h3>
+          <div class="year">1899</div>
+          <div class="work-hint">Нажмите, чтобы узнать больше →</div>
+        </div>
+      </div>
+
+      <div class="work-card fade-in" data-work="4">
+        <div class="work-media">
+          <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Siren.jpg?width=1000"
+               alt="Сирень, 1900" loading="lazy" onerror="workImgError(this)">
+        </div>
+        <div class="work-info">
+          <h3>Сирень</h3>
+          <div class="year">1900</div>
+          <div class="work-hint">Нажмите, чтобы узнать больше →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Модальное окно -->
+<div class="modal-overlay" id="workModal">
+  <div class="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <div class="modal-media"><img id="modalImg" alt=""></div>
+    <h2 id="modalTitle"></h2>
+    <span class="modal-year" id="modalYear"></span>
+    <p id="modalDesc"></p>
+    <p class="why-important" id="modalWhy"></p>
+  </div>
+</div>
+
+<!-- ==================== FEATURES ==================== -->
+<section class="features-section">
+  <div class="container">
+    <span class="section-label fade-in">04 — Художественный мир</span>
+    <h2 class="section-title fade-in">Что делает Врубеля особенным?</h2>
+    <p class="section-intro fade-in" style="color:rgba(245,232,208,0.7)">Четыре главные черты, по которым Врубеля узнают во всём мире.</p>
+
+    <div class="features-grid">
+      <div class="feature-card fade-in">
+        <div class="feature-icon">◆</div>
+        <h3>Необычный стиль</h3>
+        <p>Своеобразная манера изображения форм и цвета — «врубелевский мазок», создающий эффект кристаллической, мерцающей поверхности.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">✦</div>
+        <h3>Образность</h3>
+        <p>Важное место занимают символические и фантастические образы: демоны, пророки, мифологические существа, сказочные герои.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">✺</div>
+        <h3>«Демон»</h3>
+        <p>Один из наиболее известных художественных образов Врубеля — трагический герой, над которым мастер работал более 15 лет.</p>
+      </div>
+      <div class="feature-card fade-in">
+        <div class="feature-icon">✧</div>
+        <h3>Влияние</h3>
+        <p>Врубель оказал заметное влияние на развитие русского искусства рубежа XIX–XX веков, предвосхитив многие поиски XX столетия.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== QUIZ ==================== -->
+<section class="quiz-section" id="quiz">
+  <div class="container">
+    <span class="section-label fade-in">05 — Проверь себя</span>
+    <h2 class="section-title fade-in">Мини-тест</h2>
+    <p class="section-intro fade-in">5 вопросов о Михаиле Врубеле. Проверьте, что вы запомнили.</p>
+
+    <div class="quiz-container fade-in">
+      <div class="quiz-progress" id="quizProgress">Вопрос 1 из 5</div>
+      <div id="quizContent"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== OMSK TODAY ==================== -->
+<section class="omsk-section">
+  <div class="container">
+    <span class="section-label fade-in">06 — Память</span>
+    <h2 class="section-title fade-in">Врубель и Омск сегодня</h2>
+    <p class="omsk-text fade-in">
+      Сегодня имя Михаила Врубеля является частью культурного наследия Омска. Его творчество представлено в музейном и образовательном пространстве города, а личность художника используется как один из символов культурной истории региона.
+    </p>
+  </div>
+</section>
+
+<!-- ==================== FINAL ==================== -->
+<section class="final-section">
+  <div class="container">
+    <h2 class="section-title fade-in">«Омск — место, откуда начинается история»</h2>
+    <p class="fade-in">История Михаила Врубеля показывает, что связь человека с родным регионом может стать частью большого культурного наследия России.</p>
+    <button type="button" class="btn btn-primary fade-in" id="retakeBtn">Пройти тест ещё раз</button>
+  </div>
+</section>
+
+<!-- ==================== QR ==================== -->
+<section class="qr-section">
+  <div class="container">
+    <div class="qr-card fade-in">
+      <h2>Откройте проект с телефона</h2>
+      <p class="qr-subtitle">Наведите камеру на QR-код или сохраните его для стенда</p>
+      <div id="qrcode"></div>
+      <div class="qr-url" id="qrUrl"></div>
+      <button class="download-btn" id="downloadQR">Скачать QR-код</button>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== AUTHOR + SOURCES ==================== -->
+<section class="sources-section">
+  <div class="container">
+    <div class="author-card fade-in">
+      <div class="author-label">Работу выполнил</div>
+      <div class="author-name">Тонконогов Павел</div>
+      <div class="author-meta">студент лечебного факультета ОмГМУ, группа 104</div>
+    </div>
+
+    <h3>Источники</h3>
+    <div class="sources-list">
+      <div>Государственная Третьяковская галерея — <a href="https://www.tretyakovgallery.ru" target="_blank" rel="noopener">tretyakovgallery.ru</a></div>
+      <div>Государственный Русский музей — <a href="https://www.rusmuseum.ru" target="_blank" rel="noopener">rusmuseum.ru</a></div>
+      <div>Омский областной музей изобразительных искусств имени М. А. Врубеля — <a href="https://www.vrubel.ru" target="_blank" rel="noopener">vrubel.ru</a></div>
+      <div>Wikimedia Commons — изображения произведений М. А. Врубеля (общественное достояние)</div>
+    </div>
+    <p class="copyright">Региональный учебный проект «Ими гордится наш регион» · Омск · 2026</p>
+  </div>
+</section>
+
+<script>
+/* ========== ВАЖНАЯ ПЕРЕМЕННАЯ — URL САЙТА ДЛЯ QR ========== */
+/* После публикации сайта замените значение ниже на реальный адрес */
+const SITE_URL = "https://example.com/vrubel-omsk";
+/* ============================================================ */
+
+/* ========== ДАННЫЕ ПРОИЗВЕДЕНИЙ ========== */
+const works = [
+  {
+    title:"Демон сидящий",
+    year:"1890",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Demon.jpg?width=1600",
+    desc:"Одна из самых знаменитых работ Врубеля. На полотне изображён печальный, задумчивый демон с огромными крыльями на фоне горного пейзажа. Картина написана по мотивам поэмы М. Ю. Лермонтова «Демон».",
+    why:"Эта работа открыла цикл «Демонов» — главную тему всего творчества Врубеля, в которой он переосмыслил образ лермонтовского героя. Хранится в Третьяковской галерее."
+  },
+  {
+    title:"Демон поверженный",
+    year:"1902",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Fallen_Demon.jpg?width=1800",
+    desc:"Грандиозное полотно размером около 1,4 × 3,9 метра. Изображён поверженный демон со сломанными крыльями на фоне снежных вершин. Художник работал над картиной напряжённо, постоянно переписывая её.",
+    why:"Кульминация всего «демонического» цикла и одна из самых масштабных работ Врубеля. Хранится в Третьяковской галерее."
+  },
+  {
+    title:"Царевна-Лебедь",
+    year:"1900",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Tsarevna-Lebed_by_Mikhail_Vrubel_(brightened).jpg?width=1200",
+    desc:"Образ героини оперы Н. А. Римского-Корсакова «Сказка о царе Салтане». Моделью стала жена художника Надежда Забела-Врубель, исполнявшая эту партию на сцене.",
+    why:"Одна из самых узнаваемых работ художника: соединяет сказочность, портретность и декоративность — характерные черты стиля Врубеля. Хранится в Третьяковской галерее."
+  },
+  {
+    title:"Пан",
+    year:"1899",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_pan.jpg?width=1200",
+    desc:"Мифологический образ древнегреческого бога лесов и пастбищ. Картина создана летом 1899 года почти без предварительных эскизов, на едином дыхании.",
+    why:"Пример зрелого мастерства Врубеля: соединение русского пейзажа и античного мифологического образа в единое символическое целое. Хранится в Третьяковской галерее."
+  },
+  {
+    title:"Сирень",
+    year:"1900",
+    img:"https://commons.wikimedia.org/wiki/Special:FilePath/Vrubel_Siren.jpg?width=1400",
+    desc:"Поэтичное панно с женской фигурой среди цветущей сирени. Работа задумывалась как часть декоративного цикла для выставки и осталась авторским вариантом.",
+    why:"Яркий пример декоративного мастерства Врубеля и его способности превращать обычные мотивы в поэтические символы. Хранится в Русском музее."
+  }
+];
+
+/* ========== ДАННЫЕ ТЕСТА ========== */
+const quizQuestions = [
+  {q:"Где родился Михаил Врубель?", options:["Москва","Омск","Казань"], correct:1},
+  {q:"В каком году родился Врубель?", options:["1840","1856","1870"], correct:1},
+  {q:"Как называется известная работа Врубеля?", options:["«Демон сидящий»","«Девятый вал»","«Утро в сосновом лесу»"], correct:0},
+  {q:"Чем прежде всего известен Врубель?", options:["Музыкой","Изобразительным искусством","Спортом"], correct:1},
+  {q:"В каком городе умер Врубель?", options:["Омск","Санкт-Петербург","Казань"], correct:1}
+];
+
+/* ========== ПЛАВНАЯ ПРОКРУТКА БЕЗ ПЕРЕЗАГРУЗКИ СТРАНИЦЫ ========== */
+function scrollToId(id){
+  const el = document.getElementById(id);
+  if(el){el.scrollIntoView({behavior:'smooth', block:'start'})}
+}
+document.querySelectorAll('[data-scroll]').forEach(btn=>{
+  btn.addEventListener('click', function(e){
+    e.preventDefault();
+    scrollToId(this.dataset.scroll);
+  });
+});
+
+/* ========== АНИМАЦИИ ПРИ ПРОКРУТКЕ ========== */
+const observer = new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting){entry.target.classList.add('visible')}
+  });
+},{threshold:0.1,rootMargin:"0px 0px -50px 0px"});
+document.querySelectorAll('.fade-in').forEach(el=>observer.observe(el));
+
+/* ========== FALLBACK ДЛЯ ИЗОБРАЖЕНИЙ ========== */
+function workImgError(img){
+  img.onerror = null;
+  const media = img.closest('.work-media');
+  img.style.display = 'none';
+  const ph = document.createElement('div');
+  ph.className = 'work-placeholder';
+  ph.textContent = img.alt;
+  media.appendChild(ph);
+}
+
+/* ========== МОДАЛЬНОЕ ОКНО ПРОИЗВЕДЕНИЙ ========== */
+const modal = document.getElementById('workModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalYear = document.getElementById('modalYear');
+const modalDesc = document.getElementById('modalDesc');
+const modalWhy = document.getElementById('modalWhy');
+const modalImg = document.getElementById('modalImg');
+
+document.querySelectorAll('.work-card').forEach(card=>{
+  card.addEventListener('click',()=>{
+    const w = works[parseInt(card.dataset.work)];
+    modalTitle.textContent = w.title;
+    modalYear.textContent = w.year;
+    modalDesc.textContent = w.desc;
+    modalWhy.textContent = "Почему важно: " + w.why;
+    modalImg.style.display = 'inline-block';
+    modalImg.onerror = ()=>{modalImg.style.display='none'};
+    modalImg.src = w.img;
+    modalImg.alt = w.title + ", " + w.year;
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  });
+});
+
+function closeModal(){
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
+}
+document.getElementById('modalClose').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+/* ========== ТЕСТ ========== */
+let currentQ = 0;
+let answers = [];
+const quizContent = document.getElementById('quizContent');
+const quizProgress = document.getElementById('quizProgress');
+
+function resetQuiz(){
+  currentQ = 0;
+  answers = [];
+  renderQuestion();
+}
+
+function renderQuestion(){
+  if(currentQ >= quizQuestions.length){renderResult();return}
+  const q = quizQuestions[currentQ];
+  quizProgress.textContent = `Вопрос ${currentQ+1} из ${quizQuestions.length}`;
+  quizContent.innerHTML = `
+    <div class="quiz-question active">
+      <span class="q-num">ВОПРОС ${currentQ+1}</span>
+      <h3>${q.q}</h3>
+      <div class="quiz-options">
+        ${q.options.map((opt,i)=>`<button type="button" class="quiz-option" data-idx="${i}">${opt}</button>`).join('')}
+      </div>
+      <div class="quiz-controls">
+        <button type="button" class="btn btn-secondary" id="prevBtn" ${currentQ===0?'disabled style="opacity:0.4;cursor:not-allowed"':''}>← Назад</button>
+        <button type="button" class="btn btn-primary" id="nextBtn" disabled>Далее →</button>
+      </div>
+    </div>
+  `;
+  if(answers[currentQ] !== undefined){
+    document.querySelectorAll('.quiz-option').forEach(btn=>{
+      if(parseInt(btn.dataset.idx) === answers[currentQ]) btn.classList.add('selected');
+    });
+    document.getElementById('nextBtn').disabled = false;
+  }
+  document.querySelectorAll('.quiz-option').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      document.querySelectorAll('.quiz-option').forEach(b=>b.classList.remove('selected'));
+      btn.classList.add('selected');
+      answers[currentQ] = parseInt(btn.dataset.idx);
+      document.getElementById('nextBtn').disabled = false;
+    });
+  });
+  document.getElementById('prevBtn').addEventListener('click',()=>{
+    if(currentQ>0){currentQ--;renderQuestion()}
+  });
+  document.getElementById('nextBtn').addEventListener('click',()=>{
+    currentQ++;
+    renderQuestion();
+  });
+}
+
+function renderResult(){
+  let score = 0;
+  answers.forEach((a,i)=>{if(a===quizQuestions[i].correct)score++});
+  const messages = [
+    "Стоит перечитать разделы выше",
+    "Неплохо, но есть куда расти",
+    "Хороший результат!",
+    "Отлично! Вы хорошо изучили материал",
+    "Прекрасно! Вы знаток Врубеля",
+    "Идеально! Вы настоящий эксперт"
+  ];
+  quizProgress.textContent = "Результат";
+  quizContent.innerHTML = `
+    <div class="quiz-result">
+      <h3>Ваш результат</h3>
+      <div class="score">${score}/${quizQuestions.length}</div>
+      <p>${messages[score]}</p>
+      <button type="button" class="btn btn-primary" id="restartQuiz">Пройти тест заново</button>
+    </div>
+  `;
+  document.getElementById('restartQuiz').addEventListener('click',resetQuiz);
+}
+
+renderQuestion();
+
+/* Кнопка «Пройти тест ещё раз» в финальном разделе:
+   сбрасывает тест и плавно прокручивает к нему БЕЗ перезагрузки страницы */
+document.getElementById('retakeBtn').addEventListener('click',()=>{
+  resetQuiz();
+  scrollToId('quiz');
+});
+
+/* ========== QR-КОД ========== */
+const qrContainer = document.getElementById('qrcode');
+const qrUrl = document.getElementById('qrUrl');
+
+function generateQR(){
+  qrContainer.innerHTML = '';
+  new QRCode(qrContainer,{
+    text: SITE_URL,
+    width: 220,
+    height: 220,
+    colorDark: "#1a1018",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  });
+  qrUrl.textContent = SITE_URL;
+}
+if(typeof QRCode !== 'undefined'){generateQR()}
+
+document.getElementById('downloadQR').addEventListener('click',()=>{
+  const img = qrContainer.querySelector('img');
+  const canvas = qrContainer.querySelector('canvas');
+  let dataUrl;
+  if(img && img.src){dataUrl = img.src}
+  else if(canvas){dataUrl = canvas.toDataURL('image/png')}
+  else {alert('QR-код ещё не сгенерирован');return}
+  const a = document.createElement('a');
+  a.href = dataUrl;
+  a.download = 'vrubel-qr.png';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+});
+</script>
+</body>
+</html>
